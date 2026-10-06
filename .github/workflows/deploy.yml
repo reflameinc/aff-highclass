@@ -14,7 +14,7 @@
 #   - SSH鍵は production 環境の Secret にだけ置く（環境の設定で main 限定）
 #     → ブランチやプルリクからは鍵を使えない（この鍵は reflame.co.jp 全体に入れるため）
 #   - .github/ と scripts/ の変更は CODEOWNERS で中山さんのレビュー必須
-#   - 転送先は下の DEPLOY_PATH に固定。/lp/<事業部>/<LP名>/ の形以外なら止まる
+#   - 転送先は下の DEPLOY_PATH に固定。このLPの転送先と一字でも違えば止まる（2026-10-06 完全一致に変更）
 #   - 転送するのは scripts/deploy-files.sh が出す一覧だけ（許可リスト方式・2026-09-29）
 #     = index.html ＋ assets/ の画像/css/js/フォント/動画。php・.htaccess・svg・html・シンボリックリンクは検品で止める
 #     （assets/ は Code Owners の対象外なので、ここで止めないと担当者1人でサーバー全体に届く）
@@ -87,7 +87,7 @@ jobs:
       - name: 転送先の検査
         run: |
           case "$DEPLOY_PATH" in
-            /home/r1300591/public_html/reflame.co.jp/lp/*/*/) echo "✓ 転送先: $DEPLOY_PATH" ;;
+            /home/r1300591/public_html/reflame.co.jp/lp/midcareer/aff/highclass/) echo "✓ 転送先: $DEPLOY_PATH" ;;
             *) echo "🛑 転送先が想定外の形: $DEPLOY_PATH"; exit 1 ;;
           esac
 
